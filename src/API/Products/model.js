@@ -35,6 +35,8 @@ const productsModel = sequelize.define("product", {
   },
 });
 
+// these are fine
+
 productsModel.belongsToMany(catagoriesModel, {
   through: productsCategoriesModel,
   foreignKey: { name: "productId", allowNull: false },
@@ -42,27 +44,12 @@ productsModel.belongsToMany(catagoriesModel, {
 
 catagoriesModel.belongsToMany(productsModel, {
   through: productsCategoriesModel,
-  foreignKey: { name: "categoryId", allowNull: false },
+  foreignKey: { name: "categoryId", allowNull: true },
 });
 
-productsModel.belongsToMany(reviewsModel, {
-  through: productsReviewsModel,
-  foreignKey: { name: "productId", allowNull: false },
-});
+// above are fine
 
-reviewsModel.belongsToMany(productsModel, {
-  through: productsReviewsModel,
-  foreignKey: { name: "reviewId", allowNull: false },
-});
-
-reviewsModel.belongsTo(usersModel, {
-  through: usersReviewsModel,
-  foreignKey: { name: "reviewId", allowNull: false },
-});
-
-usersModel.belongsToMany(reviewsModel, {
-  through: usersReviewsModel,
-  foreignKey: { name: "userId", allowNull: false },
-});
+productsModel.hasMany(reviewsModel);
+reviewsModel.belongsTo(productsModel);
 
 export default productsModel;

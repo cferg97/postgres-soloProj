@@ -3,7 +3,6 @@ import createHttpError from "http-errors";
 import { Op } from "sequelize";
 import productsCategoriesModel from "../productCategoryModel.js";
 import reviewsModel from "../Reviews/model.js";
-import usersModel from "../Users/model.js";
 import productsModel from "./model.js";
 import catagoriesModel from "../Categories/model.js";
 
@@ -49,12 +48,6 @@ productsRouter.get("/", async (req, res, next) => {
         // {
         //   model: reviewsModel,
         //   attributes: ["rate", "comment"],
-        //   include: [
-        //     {
-        //       model: usersModel,
-        //       attributes: ["firstName", "lastName"],
-        //     },
-        //   ],
         //   through: { attributes: [] },
         // },
       ],

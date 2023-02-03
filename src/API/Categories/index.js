@@ -19,7 +19,7 @@ categoriesRouter.get("/", async (req, res, next) => {
       include: [
         {
           model: productsModel,
-          attributes: ["name"],
+          attributes: ["name", "price"],
           through: { attributes: [] },
         },
       ],
