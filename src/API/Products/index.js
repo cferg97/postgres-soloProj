@@ -12,10 +12,7 @@ productsRouter.get("/", async (req, res, next) => {
   try {
     const query = {};
     if (req.query.name) {
-      query.name = { [Op.iLike]: `${req.query.name}` };
-    }
-    if (req.query.category) {
-      query.category = { [Op.iLike]: `${req.query.category}` };
+      query.name = { [Op.iLike]: `%${req.query.name}%` };
     }
     if (req.query.priceMax) {
       query.price = { [Op.lte]: `${req.query.priceMax}` };

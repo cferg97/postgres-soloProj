@@ -7,10 +7,6 @@ const reviewsModel = sequelize.define("review", {
     primaryKey: true,
     defaultValue: DataTypes.UUIDV4,
   },
-  productId: {
-    type: DataTypes.UUID,
-    allowNull: false,
-  },
   rate: {
     type: DataTypes.INTEGER,
     allowNull: false,

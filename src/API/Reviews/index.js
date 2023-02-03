@@ -23,16 +23,16 @@ reviewsRouter.get("/:reviewId", async (req, res, next) => {
   try {
     const review = await reviewsModel.findByPk(req.params.reviewId, {
       include: [
-        {
-          model: productsModel,
-          attributes: ["name"],
-          through: { attributes: [] },
-        },
-        {
-          model: usersModel,
-          attributes: ["firstName", "lastName"],
-          through: { attributes: [] },
-        },
+        // {
+        //   model: productsModel,
+        //   attributes: ["name"],
+        //   through: { attributes: [] },
+        // },
+        // {
+        //   model: usersModel,
+        //   attributes: ["firstName", "lastName"],
+        //   through: { attributes: [] },
+        // },
       ],
     });
     if (review) {
