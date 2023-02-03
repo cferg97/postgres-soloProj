@@ -10,6 +10,8 @@ import {
   unauthorizedErrorHandler,
 } from "./errorHandlers.js";
 import usersRouter from "./API/Users/index.js";
+import productsRouter from "./API/Products/index.js";
+import reviewsRouter from "./API/Reviews/index.js";
 
 const server = express();
 const port = process.env.PORT;
@@ -17,11 +19,12 @@ const port = process.env.PORT;
 server.use(cors());
 server.use(express.json());
 
-server.use("/users", usersRouter)
+server.use("/users", usersRouter);
+server.use("/products", productsRouter);
+server.use("/reviews", reviewsRouter);
 
 await pgConnect();
 await syncModels();
-
 
 server.use(badRequestErrorHandler);
 server.use(notFoundErrorHandler);
