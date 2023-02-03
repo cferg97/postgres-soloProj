@@ -1,4 +1,5 @@
 import express from "express";
+import productsModel from "../Products/model.js";
 import categoriesModel from "./model.js";
 
 const categoriesRouter = express.Router();
@@ -14,7 +15,15 @@ categoriesRouter.post("/", async (req, res, next) => {
 
 categoriesRouter.get("/", async (req, res, next) => {
   try {
-    const category = await categoriesModel.findAll();
+    const category = await categoriesModel.findAll({
+      include: [
+        {
+          model: productsModel,
+          attributes: ["name"],
+          through: { attributes: [] },
+        },
+      ],
+    });
     res.send(category);
   } catch (err) {
     next(err);

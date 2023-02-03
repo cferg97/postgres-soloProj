@@ -12,6 +12,7 @@ import {
 import usersRouter from "./API/Users/index.js";
 import productsRouter from "./API/Products/index.js";
 import reviewsRouter from "./API/Reviews/index.js";
+import categoriesRouter from "./API/Categories/index.js";
 
 const server = express();
 const port = process.env.PORT;
@@ -21,6 +22,7 @@ server.use(express.json());
 
 server.use("/users", usersRouter);
 server.use("/products", productsRouter);
+server.use("/categories", categoriesRouter);
 server.use("/reviews", reviewsRouter);
 
 await pgConnect();

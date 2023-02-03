@@ -5,6 +5,7 @@ import productsCategoriesModel from "../productCategoryModel.js";
 import reviewsModel from "../Reviews/model.js";
 import usersModel from "../Users/model.js";
 import productsModel from "./model.js";
+import catagoriesModel from "../Categories/model.js";
 
 const productsRouter = express.Router();
 
@@ -41,21 +42,21 @@ productsRouter.get("/", async (req, res, next) => {
       ],
       include: [
         {
-          model: categoriesModel,
+          model: catagoriesModel,
           attributes: ["name"],
           through: { attributes: [] },
         },
-        {
-          model: reviewsModel,
-          attributes: ["rate", "comment"],
-          include: [
-            {
-              model: usersModel,
-              attributes: ["firstName", "lastName"],
-            },
-          ],
-          through: { attributes: [] }, 
-        },
+        // {
+        //   model: reviewsModel,
+        //   attributes: ["rate", "comment"],
+        //   include: [
+        //     {
+        //       model: usersModel,
+        //       attributes: ["firstName", "lastName"],
+        //     },
+        //   ],
+        //   through: { attributes: [] },
+        // },
       ],
     });
     res.send(products);
@@ -77,6 +78,18 @@ productsRouter.post("/", async (req, res, next) => {
         })
       );
     }
+    res.status(201).send({ id: productId });
+  } catch (err) {
+    next(err);
+  }
+});
+
+productsRouter.put("/:productid/category", async (req, res, next) => {
+  try {
+    const { productId } = await productsCategoriesModel.create({
+      productId: req.params.productid,
+      categoryId: req.body.categories,
+    });
     res.status(201).send({ id: productId });
   } catch (err) {
     next(err);

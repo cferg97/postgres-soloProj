@@ -35,6 +35,13 @@ reviewsRouter.get("/:reviewId", async (req, res, next) => {
         },
       ],
     });
+    if (review) {
+      res.send(review);
+    } else {
+      next(
+        createHttpError(404, `Review with Id ${req.params.reviewId} not found.`)
+      );
+    }
   } catch (err) {
     next(err);
   }
